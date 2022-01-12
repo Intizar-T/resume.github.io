@@ -52,7 +52,14 @@ h3 {
 	padding-left: 1.2em;
 }
 .justify:before {
-	content: "✓";
+	content: "\2714\0020";
 	position: absolute;
 	left: 0;
+}
+
+@media only screen and (max-width: 1000px) {
+  .projects{
+    width: 175px; 
+    height: 75px;
+  }
 }
