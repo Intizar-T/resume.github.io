@@ -76,7 +76,7 @@
         </div>
       </ul>
 
-      <h2>Experience</h2>
+      <h2 id="experince_section">Experience</h2>
       <div class="row mb-3">
         <!-- OpenFormat -->
         <div class="one-half column">
@@ -84,11 +84,16 @@
           <ul class="list-unstyled">
             <li>
               <strong>Software Engineer</strong>
-              <small class="accent" id="openformatWorkPeriod"
-                >Jan 2024 - Present
-              </small>
+              <small class="accent" id="openformat">Jan 2024 - Present </small>
             </li>
             <li><strong>Location: </strong>Seoul, South Korea</li>
+            <li><strong>Work Type: </strong>Full-time | On-site</li>
+            <li>
+              <strong>Contact: </strong
+              ><a target="_blank" href="https://www.linkedin.com/in/ji-hwan-lee"
+                >Ji Hwan Lee</a
+              >
+            </li>
           </ul>
           <ul class="custom_list">
             <li class="justify justify_text">
@@ -130,11 +135,14 @@
           <ul class="list-unstyled">
             <li>
               <strong>Software Engineer</strong>
-              <small class="accent">Nov 2022 - Present</small>
+              <small class="accent" id="ainomis"
+                >Nov 2022 - Jan 2024 (1 yrs, 2 mo)</small
+              >
             </li>
             <li><strong>Location: </strong>Seoul, South Korea</li>
+            <li><strong>Work Type: </strong>Full-time | Remote</li>
             <li>
-              <strong>Supervisor: </strong>
+              <strong>Contact: </strong>
               <a target="_blank" href="mailto:ceo.ai.nomis@gmail.com"
                 >Kim Si-won</a
               >
@@ -188,11 +196,12 @@
           <ul class="list-unstyled">
             <li>
               <strong>Software Engineer</strong>
-              <small class="accent">Jun 2022 - Nov 2022</small>
+              <small class="accent" id="us2">Jun 2022 - Nov 2022 (6 mo)</small>
             </li>
             <li><strong>Location: </strong>Singapore</li>
+            <li><strong>Work Type: </strong>Full-time | On-site</li>
             <li>
-              <strong>Supervisor: </strong
+              <strong>Contact: </strong
               ><a
                 target="_blank"
                 href="https://www.linkedin.com/in/mathias-iversen"
@@ -225,11 +234,14 @@
           <ul class="list-unstyled">
             <li>
               <strong>Research Intern</strong>
-              <small class="accent">June 2021 - Present</small>
+              <small class="accent" id="columbia"
+                >Jun 2021 - Jun 2022 (1 yr)</small
+              >
             </li>
             <li><strong>Location: </strong>Columbia University in New York</li>
+            <li><strong>Work Type: </strong>Full-time | Remote</li>
             <li>
-              <strong>Supervisor: </strong
+              <strong>Contact: </strong
               ><a href="https://www.cheme.columbia.edu/faculty/daniel-esposito">
                 Prof. Dan Esposito</a
               >
@@ -261,11 +273,14 @@
           <ul class="list-unstyled">
             <li>
               <strong>Frontend Engineer</strong>
-              <small class="accent">Feb 2022 - Apr 2022</small>
+              <small class="accent" id="redwit"
+                >Feb 2022 - Apr 2022 (3 mo)</small
+              >
             </li>
             <li><strong>Location: </strong>Daejeon, South Korea</li>
+            <li><strong>Work Type: </strong>Full-time | Hybrid</li>
             <li>
-              <strong>Supervisor: </strong>
+              <strong>Contact: </strong>
               <a
                 target="_blank"
                 href="https://www.linkedin.com/in/jonghyeok-kang-914b46191/?trk=org-employees_profile-result-card_result-card_full-click&originalSubdomain=pl"
@@ -302,11 +317,14 @@
           <ul class="list-unstyled">
             <li>
               <strong>Backend Engineer</strong>
-              <small class="accent">Mar 2021 - Jun 2021</small>
+              <small class="accent" id="kixlab"
+                >Mar 2021 - Jun 2021 (3 mo)</small
+              >
             </li>
             <li><strong>Location: </strong>KAIST, South Korea</li>
+            <li><strong>Work Type: </strong>Full-time | Hybrid</li>
             <li>
-              <strong>Supervisor: </strong>
+              <strong>Contact: </strong>
               <a target="_blank" href="https://juhokim.com/">Juho Kim</a>
             </li>
           </ul>
@@ -594,4 +612,56 @@
       </div>
     </div>
   </body>
+
+  <script>
+    function helper(diffDays) {}
+
+    function calcWorkedPeriod(id) {
+      const currentJobElem = document.getElementById(id);
+      const currentText = currentJobElem.innerHTML;
+      const dates = currentText.split("-");
+      const startDate = new Date(dates[0]).getTime();
+      let endDate;
+      if (dates[1].trim().toLowerCase() === "present")
+        endDate = new Date().getTime();
+      else endDate = new Date(dates[1]);
+
+      let diffDays = Math.round((endDate - startDate) / (1000 * 3600 * 24));
+      const recordDays = diffDays;
+      let diffMonths;
+      let diffYears;
+
+      if (diffDays >= 30) {
+        diffMonths = Math.floor(diffDays / 30);
+        diffDays = diffDays - diffMonths * 30;
+      }
+
+      if (diffMonths != null && diffMonths >= 12) {
+        diffYears = Math.floor(diffMonths / 12);
+        diffMonths = diffMonths - diffYears * 12;
+      }
+
+      diffDays = diffYears != null ? "" : ` ${diffDays} days`;
+      diffMonths =
+        diffMonths != null && diffMonths !== 0 ? ` ${diffMonths} mo` : "";
+      diffYears = diffYears != null ? `${diffYears} yrs` : "";
+
+      currentJobElem.innerHTML = `${currentText} (${diffYears}${diffMonths}${diffDays})`;
+
+      return recordDays;
+    }
+
+    let totalExperienceDays = 0;
+    const jobs = [
+      "openformat",
+      // "ainomis",
+      // "us2",
+      // "columbia",
+      // "redwit",
+      // "kixlab",
+    ];
+    for (let i = 0; i < jobs.length; i++) {
+      totalExperienceDays += calcWorkedPeriod(jobs[i]);
+    }
+  </script>
 </html>
